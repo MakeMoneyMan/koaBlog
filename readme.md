@@ -3,12 +3,15 @@
 - koa-router
 - koa-bodyparser
 - koa-jwt
-- vue 全家桶
+- koa-view
+- koa-session
 - mongodb
+- ~~vue 全家桶~~
 
 
 ## 计划
 - router/bodyparser  mongodb（增删改查）
-- token登陆
+- ~~token登陆~~
+- session登陆
 - 代码展示器
   
