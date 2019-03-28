@@ -17,10 +17,11 @@ module.exports = router
         await next();
         ctx.response.body = "user";
     })
-    .get('/login:username', async (ctx, next)=>{
+    .get('/login/:id', async (ctx, next)=>{
         await next();
         // console.log(JSON.stringify(ctx.params.username))
-        ctx.response.body = JSON.stringify(ctx.params.username);
+        // ctx.response.body = JSON.stringify(ctx.params.username);
+        ctx.response.body = "login!!!" + ctx.params.id;
     })
 
 

@@ -5,7 +5,7 @@
 - koa-jwt
 - koa-view
 - koa-session
-- mongodb
+- mongodb mongoose
 - ~~vue 全家桶~~
 
 
