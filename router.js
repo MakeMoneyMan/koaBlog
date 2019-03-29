@@ -4,10 +4,12 @@ const R = require('koa-router');
 let router = new R();
 
 
+const index = require('./controllers/index')
+
+console.log(index.index)
 module.exports = router
     .get('/', async (ctx, next)=>{
-        ctx.response.body = "index";
-        next();
+        index.index(ctx, next);
     })
     .get('/hello', async (ctx, next)=>{
         await next();

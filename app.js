@@ -4,7 +4,6 @@ const router = require('koa-router')();
 const bodyparser = require('koa-bodyparser')
 const myrouter = require('./router.js');
 const mongoose = require('mongoose')
-const views = require('koa-views');
 
 mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then(res=>{
         
