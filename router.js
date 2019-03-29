@@ -5,6 +5,10 @@ let router = new R();
 
 
 module.exports = router
+    .get('/', async (ctx, next)=>{
+        ctx.response.body = "index";
+        next();
+    })
     .get('/hello', async (ctx, next)=>{
         await next();
         ctx.response.body = "hello";
