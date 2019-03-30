@@ -3,7 +3,9 @@ const Koa = require('koa');
 const router = require('koa-router')();
 const bodyparser = require('koa-bodyparser')
 const myrouter = require('./router.js');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const view = require('koa-views');
+const nunjucks = require('nunjucks');
 
 mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then(res=>{
         
@@ -58,6 +60,7 @@ mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then
 
 const app = new Koa();
 
+app.use(view(__dirname + '/views', { map: {html: 'nunjucks' }}))
 app.use(bodyparser());
 app.use(myrouter.routes());
 app.use(require('koa-static-server')({rootDir: 'public'}))

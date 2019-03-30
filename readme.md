@@ -1,13 +1,15 @@
 ## 组成
-- koa.ja
+- koa.js
 - koa-router
 - koa-bodyparser
-- koa-jwt
 - koa-view
+- Nunjucks https://nunjucks.bootcss.com/
+- koa-nunjucks-2
 - koa-session
 - koa-static-server
 - mongodb mongoose
 - ~~vue 全家桶~~
+- ~~koa-jwt~~
 
 
 ## 计划

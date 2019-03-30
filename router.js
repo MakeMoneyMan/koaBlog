@@ -9,7 +9,7 @@ const index = require('./controllers/index')
 console.log(index.index)
 module.exports = router
     .get('/', async (ctx, next)=>{
-        index.index(ctx, next);
+        await index.index(ctx, next);
     })
     .get('/hello', async (ctx, next)=>{
         await next();
