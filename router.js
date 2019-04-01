@@ -1,25 +1,23 @@
 require('babel-register');
-const Koa = require('koa');
 const R = require('koa-router');
 let router = new R();
 
 
 const index = require('./controllers/index')
+const article = require('./controllers/article')
 
-console.log(index.index)
+
 module.exports = router
     .get('/', async (ctx, next)=>{
         await index.index(ctx, next);
     })
-    .get('/hello', async (ctx, next)=>{
-        await next();
-        ctx.response.body = "hello";
+    .get('/article', async (ctx, next)=>{
+        await article.article(ctx, next);
     })
-    .get('/user', async (ctx, next)=>{
-        await next();
-        ctx.response.body = "user2333";
+    .post('/add', async (ctx, next)=>{
+        await article.add(ctx, next);
     })
-    .get('/admin', async (ctx, next)=>{
+    .get('/article', async (ctx, next)=>{
         await next();
         ctx.response.body = "user";
     })
