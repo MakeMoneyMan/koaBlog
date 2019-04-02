@@ -1,11 +1,13 @@
+module.exports = function(mongoose){
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+    const Schema = mongoose.Schema;
+    const ObjectId = Schema.ObjectId;
+    
+    const BlogPost = new Schema({
+        _id: Number,
+        title: String,
+        content: String,
+        date: Date
+    });
 
-const BlogPost = new Schema({
-    _id: Number,
-    title: String,
-    content: String,
-    date: Date
-});
+}

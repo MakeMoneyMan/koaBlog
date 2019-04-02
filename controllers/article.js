@@ -28,7 +28,7 @@ module.exports = {
         
         const myModel = mongoose.model('BlogPostModel');
         let instance = new myModel({
-            _id: new Date().valueOf(),
+            _id: mongoose.Types.ObjectId(),
             title: ctx.request.body.title,
             content: ctx.request.body.content,
             date: new Date()
@@ -42,5 +42,8 @@ module.exports = {
         });
 
         await ctx.render('add', {msg: result});
+    },
+    detail: async function(ctx, next){
+        await ctx.render('detail', {title: "标题", content: '内容'});
     }
 }
