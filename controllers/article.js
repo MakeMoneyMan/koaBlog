@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-// const BlogPost = new Schema({
-//     _id: String,
-//     title: String,
-//     content: String,
-//     date: Date
-// });
+const BlogPost = new Schema({
+    _id: String,
+    title: String,
+    content: String,
+    date: Date
+});
 
 async function save(instance){
     return new Promise((resolve, reject)=>{
@@ -43,6 +43,27 @@ module.exports = {
         await ctx.render('add', {msg: result});
     },
     detail: async function(ctx, next){
-        await ctx.render('detail', {title: "标题", content: '内容'});
+        const myModel = mongoose.model('BlogPostModel');
+        var result = await find(myModel, {_id: ctx.params.id});
+        var obj = {};
+        Object.assign(obj, result[0]);
+        console.log(obj._doc);
+        await ctx.render('detail', obj._doc);
+        // await myModel.find({_id: ctx.params.id}, function(err, result){
+
+        //     // console.log(result[0]);
+        //     ctx.render('detail', result[0]);
+        // });
     }
+}
+
+async function find(myModel, obj){
+    return new Promise((resolve, reject)=>{
+        myModel.find(obj, (err, result)=>{
+            // console.log('err')
+            // console.log(err)
+            if(err){ reject("添加失败") }
+            else {resolve(result);}
+        });
+    })
 }

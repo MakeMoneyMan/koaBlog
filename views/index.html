@@ -57,7 +57,7 @@
 
                 {% for item in list %}
 
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="/detail/{{item._id}}" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{item.title}}</h5>
                     <!-- <small>3 days ago</small> -->
@@ -93,6 +93,7 @@
                 <li><a href="#">JavaScript</a></li>
                 <li><a href="#">HTML5</a>、<a href="#">CSS3</a></li>
                 <li><a href="#">NodeJS</a></li>
+                <li><a href="#">Vue</a></li>
                 <li><a href="#">踩坑</a></li>
             </ul>
         </div>

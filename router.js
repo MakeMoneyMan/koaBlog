@@ -17,12 +17,11 @@ module.exports = router
     .post('/add', async (ctx, next)=>{
         await article.add(ctx, next);
     })
-    .get('/detail', async (ctx, next)=>{
-        console.log('detail');
+    .get('/detail/:id', async (ctx, next)=>{
+        // console.log('detail');
         await article.detail(ctx, next);
     })
     .get('/article', async (ctx, next)=>{
-        await next();
         ctx.response.body = "user";
     })
     .get('/login/:id', async (ctx, next)=>{
