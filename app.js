@@ -24,7 +24,7 @@ mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then
     const ObjectId = Schema.ObjectId;
     
     const BlogPost = new Schema({
-        _id: Number,
+        _id: String,
         title: String,
         content: String,
         date: Date
