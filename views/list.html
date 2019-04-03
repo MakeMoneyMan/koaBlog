@@ -1,0 +1,29 @@
+
+
+
+{% extends "views/parent.html" %}
+
+{% block left %}
+<button type="button" class="btn btn-primary" onclick="window.location.href='/article'">添加</button>
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+{% for item in list %}
+
+<tr>
+  <th scope="row">3</th>
+  <td>{{item.title}}</td>
+  <td>the Bird</td>
+  <td><a href="{{item._id}}">编辑</a> | <a href="{{item._id}}">删除</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

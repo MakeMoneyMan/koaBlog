@@ -27,9 +27,12 @@ mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then
         _id: String,
         title: String,
         content: String,
+        is_headline: Number,
+        hot_sort: Number,
+        description: String,
         date: Date
     });
-    const myModel = mongoose.model('BlogPostModel', BlogPost);
+    mongoose.model('BlogPostModel', BlogPost);
     // //查
     // myModel.find((err, data)=>{
     //     console.log(data);

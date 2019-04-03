@@ -11,6 +11,16 @@ module.exports = router
     .get('/', async (ctx, next)=>{
         await index.index(ctx, next);
     })
+    .get('/login', async (ctx, next)=>{
+        await index.login(ctx, next);
+    })
+    .post('/login_post', async (ctx, next)=>{
+        await index.login_post(ctx, next);
+        // await index.index(ctx, next);
+    })
+    .get('/list', async (ctx, next)=>{
+        await index.list(ctx, next);
+    })
     .get('/article', async (ctx, next)=>{
         await article.article(ctx, next);
     })

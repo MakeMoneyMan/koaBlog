@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const BlogPost = new Schema({
-    _id: String,
-    title: String,
-    content: String,
-    date: Date
-});
+// const BlogPost = new Schema({
+//     _id: String,
+//     title: String,
+//     content: String,
+//     date: Date
+// });
 
 async function save(instance){
     return new Promise((resolve, reject)=>{
         instance.save((err)=>{
-            console.log(err)
+            // console.log(err)
             if(err){ reject("添加失败") }
             else {resolve("添加成功");}
         });
@@ -35,7 +35,7 @@ module.exports = {
         // console.log(instance);
         let result;
         await save(instance).then(res=>{
-            console.log(res);
+            // console.log(res);
             result = res;
             // ctx.response.body = res;
         });
