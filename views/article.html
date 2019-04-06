@@ -4,22 +4,32 @@
 
 
 <form action="/add" method="POST">
+    {% if content._id %} <input type="hidden" name="_id" value="{{content._id}}"> {% endif %}
     <div class="form-group">
         <label for="exampleInputEmail1">标题</label>
-        <input type="text" class="form-control" name="title">
+        <input type="text" class="form-control" name="title" value="{{ content.title }}">
     </div>
     <div class="form-group">
-        <label for="exampleInputEmail1">hot排序（留空则不是hot）</label>
-        <input type="text" class="form-control" name="hot">
+        <label for="exampleInputEmail1">hot排序（数字越大排序越高，留空则不是hot）</label>
+        <input type="number" class="form-control" name="hot" value="{{ content.hot }}">
     </div>
     <div class="form-group">
-        <label for="exampleInputEmail1">是否头条</label>
-        <input type="checkbox" class="form-control" name="is_headline">
+        <label for="exampleInputEmail1">Category（, 隔开）</label>
+        <input type="text" class="form-control" name="category" value="{{ content.category }}">
+    </div>
+    
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Description</label>
+      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ content.description }}</textarea>
+    </div>
+    <div class="form-check">
+        <input name="is_headline" type="checkbox" value="1" {% if content.is_headline=='1' %}checked="checked"{% endif %} class="form-check-input">
+        <label class="form-check-label" for="exampleCheck1">是否头条</label>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">内容</label>
         <div id="div1">
-            <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+            {{ content.content | safe }}
         </div>
         <textarea name="content" style="display: none;" id="text1" style="width:100%; height:200px;"></textarea>
     </div>

@@ -11,17 +11,26 @@ module.exports = router
     .get('/', async (ctx, next)=>{
         await index.index(ctx, next);
     })
+    .get('/list/:number', async (ctx, next)=>{
+        await index.index(ctx, next);
+    })
+    .get('/search/:keyword', async (ctx, next)=>{
+        await index.index(ctx, next);
+    })
     .get('/login', async (ctx, next)=>{
         await index.login(ctx, next);
     })
-    .post('/login_post', async (ctx, next)=>{
+    .post('/login', async (ctx, next)=>{
         await index.login_post(ctx, next);
         // await index.index(ctx, next);
     })
-    .get('/list', async (ctx, next)=>{
-        await index.list(ctx, next);
+    .get('/admin/list', async (ctx, next)=>{
+        await article.list(ctx, next);
     })
     .get('/article', async (ctx, next)=>{
+        await article.article(ctx, next);
+    })
+    .get('/article/:id', async (ctx, next)=>{
         await article.article(ctx, next);
     })
     .post('/add', async (ctx, next)=>{
@@ -31,14 +40,14 @@ module.exports = router
         // console.log('detail');
         await article.detail(ctx, next);
     })
-    .get('/article', async (ctx, next)=>{
-        ctx.response.body = "user";
-    })
     .get('/login/:id', async (ctx, next)=>{
         await next();
         // console.log(JSON.stringify(ctx.params.username))
         // ctx.response.body = JSON.stringify(ctx.params.username);
         ctx.response.body = "login!!!" + ctx.params.id;
+    })
+    .get('/delete/:id', async function(ctx, next){
+        await article.delete(ctx, next);
     })
 
 

@@ -10,7 +10,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">已删除？</th>
             <th scope="col">Handle</th>
           </tr>
         </thead>
@@ -18,10 +18,10 @@
 {% for item in list %}
 
 <tr>
-  <th scope="row">3</th>
+  <th scope="row">{{loop.index}}</th>
   <td>{{item.title}}</td>
-  <td>the Bird</td>
-  <td><a href="{{item._id}}">编辑</a> | <a href="{{item._id}}">删除</a></td>
+  <td>{{item.is_del}}</td>
+  <td><a href="/article/{{item._id}}">编辑</a> | <a href="/delete/{{item._id}}">删除</a></td>
 </tr>
 {% endfor %}
 </tbody>

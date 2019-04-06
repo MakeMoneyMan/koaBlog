@@ -23,9 +23,11 @@
         <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li> -->
+        {% if is_login == 'wjh' %}
+        <li class="nav-item">
+            <a class="nav-link" href="/admin/list">Manage</a>
+        </li>
+        {% endif %}
         <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown
@@ -40,11 +42,11 @@
         <!-- <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
         </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
+        </ul> -->
+        <div class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" value="{{keyword}}" id="keyword" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="(function(){window.location.href='/search/' + document.getElementById('keyword').value;})();">Search</button>
+        </div>
     </div>
 </nav>
 <div class="jumbotron jumbotron-fluid" style="background-size: 100%; background-position: -100px -127px; background-image: url('https://img.pconline.com.cn/images/upload/upc/tx/photoblog/1904/02/c11/140323219_1554220392436_mthumb.jpg');">
@@ -62,21 +64,17 @@
         <div class="col-sm">
             <h3>Hot</h3>
             <ul>
-                <li><a href="#">这是一条火热的信息</a></li>
-                <li><a href="#">这是一条火热的信息这是一条火热的信息这是一条火热的信息</a></li>
-                <li><a href="#">这是一条火热的信息这是一条火热的信息这是一条火热的信息</a></li>
-                <li><a href="#">这是一条火热的信息这是一条火热的信息这是一条火热的信息</a></li>
-                <li><a href="#">这是一条火热的信息</a></li>
-                <li><a href="#">这是一条火热的信息</a></li>
-                <li><a href="#">这是一条火热的信息</a></li>
+                {% for item in hot %}
+                    <li><a href="/detail/{{item._id}}">{{item.title}}</a></li>
+                {% endfor %}
             </ul>
             <h3>Category</h3>
             <ul>
-                <li><a href="#">JavaScript</a></li>
-                <li><a href="#">HTML5</a>、<a href="#">CSS3</a></li>
-                <li><a href="#">NodeJS</a></li>
-                <li><a href="#">Vue</a></li>
-                <li><a href="#">踩坑</a></li>
+                <li><a href="/search/JavaScript">JavaScript</a></li>
+                <li><a href="/search/HTML5">HTML5</a>、<a href="/search/CSS3">CSS3</a></li>
+                <li><a href="/search/NodeJS">NodeJS</a></li>
+                <li><a href="/search/Vue">Vue</a></li>
+                <li><a href="/search/踩坑">踩坑</a></li>
             </ul>
         </div>
     </div>

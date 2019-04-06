@@ -5,12 +5,12 @@ const bodyparser = require('koa-bodyparser')
 const myrouter = require('./router.js');
 const mongoose = require('mongoose');
 const view = require('koa-views');
-const nunjucks = require('nunjucks');
+// const nunjucks = require('nunjucks');
+const session = require('koa-session');
 
 
 mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then(res=>{
         
-    
     // //    表的实例                collcetion名字(表名)
     // const myModel = mongoose.model('BlogPostModel', BlogPost);
 
@@ -23,13 +23,16 @@ mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then
     const Schema = mongoose.Schema;
     const ObjectId = Schema.ObjectId;
     
+    // console.log(ObjectId())
     const BlogPost = new Schema({
-        _id: String,
+        // _id: ObjectId,
         title: String,
         content: String,
         is_headline: Number,
-        hot_sort: Number,
+        hot: Number,
         description: String,
+        category: String,
+        is_del: Number,
         date: Date
     });
     mongoose.model('BlogPostModel', BlogPost);
@@ -64,7 +67,8 @@ mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then
 
 
 const app = new Koa();
-
+app.keys = ['some secret hurr'];
+app.use(session({}, app));
 app.use(view(__dirname + '/views', { map: {html: 'nunjucks' }}))
 app.use(bodyparser());
 app.use(myrouter.routes());

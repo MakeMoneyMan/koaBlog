@@ -13,17 +13,25 @@
             <h5 class="mb-1">{{item.title}}</h5>
             <!-- <small>3 days ago</small> -->
             </div>
-            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+            <p class="mb-1">{{item.description}}</p>
             <!-- <small>Donec id elit non mi porta.</small> -->
         </a>
         {% endfor %}
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link text-secondary" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link text-secondary" href="#">1</a></li>
-                <li class="page-item"><a class="page-link text-secondary" href="#">2</a></li>
-                <li class="page-item"><a class="page-link text-secondary" href="#">3</a></li>
-                <li class="page-item"><a class="page-link text-secondary" href="#">Next</a></li>
+                <!-- <li class="page-item"><a class="page-link text-secondary" href="/list/{{number - 1}}">Previous</a></li> -->
+                {% for item in total %}
+                    {% if loop.first %}
+                    {% endif %}
+                    {% if loop.index == number %}
+                    <li class="page-item active"><a class="page-link" href="/list/{{loop.index}}">{{loop.index}}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link text-secondary" href="/list/{{loop.index}}">{{loop.index}}</a></li>
+                    {% endif %}
+                    {% if loop.last %}
+                    {% endif %}
+                {% endfor %}
+                <!-- <li class="page-item"><a class="page-link text-secondary" href="/list/{{total.length}}">Next</a></li> -->
             </ul>
         </nav>
     </div>
