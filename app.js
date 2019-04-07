@@ -5,6 +5,7 @@ const bodyparser = require('koa-bodyparser')
 const myrouter = require('./router.js');
 const mongoose = require('mongoose');
 const view = require('koa-views');
+const body = require('koa-body');
 // const nunjucks = require('nunjucks');
 const session = require('koa-session');
 
@@ -67,12 +68,15 @@ mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then
 
 
 const app = new Koa();
+app.use(body({
+    multipart: true
+}));
 app.keys = ['some secret hurr'];
 app.use(session({}, app));
 app.use(view(__dirname + '/views', { map: {html: 'nunjucks' }}))
 app.use(bodyparser());
 app.use(myrouter.routes());
-app.use(require('koa-static-server')({rootDir: 'public'}))
+app.use(require('koa-static-server')({rootDir: 'public'}));
 app.use(router.allowedMethods());
 
 app.listen('3000');

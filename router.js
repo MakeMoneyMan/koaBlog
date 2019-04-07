@@ -49,5 +49,8 @@ module.exports = router
     .get('/delete/:id', async function(ctx, next){
         await article.delete(ctx, next);
     })
+    .post('/upload', async function(ctx, next){
+        await index.upload(ctx, next);
+    })
 
 

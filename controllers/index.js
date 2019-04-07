@@ -1,7 +1,8 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
+const fs = require('fs');
+const path = require('path');
 
 // const BlogPost = new Schema({
 //     _id: Number,
@@ -70,6 +71,21 @@ module.exports = {
         // // console.log(result);
         // ctx.state = {title: "网站标题"}
         // await ctx.render('index', {title: "网站标题", list: result})
+    },
+    upload: async (ctx, next)=>{
+        ctx.set("Content-Type", "application/json");
+
+        console.log(ctx.request.files[Object.keys(ctx.request.files)[0]]);
+        let file = ctx.request.files[Object.keys(ctx.request.files)[0]];
+        let readStream = fs.createReadStream(file.path);
+        let fileName = path.join(__dirname, '../public/upload/') + `/${file.name}`;
+        // let path = fileName;
+        let writeStream = fs.createWriteStream(fileName);
+        readStream.pipe(writeStream);
+        
+        ctx.body = JSON.stringify({"errno":0, "data": ['/upload/'+file.name]});
+        console.log({"error":0, "data": ['/upload/'+file.name]}.toString());
+
     }
 }
 

@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
@@ -23,13 +22,15 @@ module.exports = {
     article: async function(ctx, next){
         if(!ctx.session.username) ctx.redirect('/login');
         let result = {};
+        result.hot = 0;
         let id = ctx.params.id || '';
         if(id){
             const myModel = mongoose.model('BlogPostModel');
             result = await myModel.find({_id: id}).exec();
+            result = result[0];
         }
         // console.log(result[0]);
-        await ctx.render('article', {content: result[0]});
+        await ctx.render('article', {content: result});
     },
     add: async function(ctx, next){
         if(!ctx.session.username) ctx.redirect('/login');
