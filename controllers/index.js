@@ -37,7 +37,7 @@ module.exports = {
         let hot = await myModel.find({hot: {$gt: 0}});
 
         await ctx.render('index', {
-            title: "网站标题", 
+            title: "草果网", 
             list: result, 
             number: now_number, 
             total: [].slice.call({length: Math.ceil(total / page)}),
