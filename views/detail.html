@@ -9,4 +9,18 @@
             
     <h1>{{title}}</h1>
     <div>{{content | safe}}</div>
+
+    <style>
+    pre {
+        padding: 10px;
+        background: #fafafa;
+        font: 12px / 18px Consolas, monospace, serif;
+        color: #444;
+        -moz-tab-size: 4;
+        tab-size: 4;
+        overflow: auto;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+    </style>
 {% endblock %}
