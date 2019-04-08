@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 const fs = require('fs');
 const path = require('path');
+const qiniu = require('qiniu');
 
 // const BlogPost = new Schema({
 //     _id: Number,
@@ -73,20 +74,74 @@ module.exports = {
         // await ctx.render('index', {title: "网站标题", list: result})
     },
     upload: async (ctx, next)=>{
-        ctx.set("Content-Type", "application/json");
 
-        console.log(ctx.request.files[Object.keys(ctx.request.files)[0]]);
         let file = ctx.request.files[Object.keys(ctx.request.files)[0]];
         let readStream = fs.createReadStream(file.path);
-        let fileName = path.join(__dirname, '../public/upload/') + `/${file.name}`;
-        // let path = fileName;
-        let writeStream = fs.createWriteStream(fileName);
-        readStream.pipe(writeStream);
-        
-        ctx.body = JSON.stringify({"errno":0, "data": ['/upload/'+file.name]});
-        console.log({"error":0, "data": ['/upload/'+file.name]}.toString());
+        let fileName = (new Date().valueOf()).toString() + Math.ceil(Math.random() * 1000000).toString() * 100 + file.name;
+
+
+        var accessKey = '7BRQWrOtRTW8wjUh631mFKSFMX66cVe_lLtLX6aU';
+        var secretKey = 'Dl10pm6H2UrihxYBuTyWy4g3QEzlO3NcqRI6aeHa';
+        var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
+        var options = {
+            scope: "wjhbucket",
+        };
+        var putPolicy = new qiniu.rs.PutPolicy(options);
+        var uploadToken=putPolicy.uploadToken(mac);
+        var putExtra = new qiniu.form_up.PutExtra();
+        var readableStream = readStream; // 可读的流
+        var result = await upload(uploadToken, fileName, readableStream, putExtra);
+        console.log(result);
+        ctx.body = JSON.stringify({"errno":0, "data": ['http://bucket.icaoguo.com/' + result.respBody.key]});
+        // await formUploader.putStream(uploadToken, fileName, readableStream, putExtra, function(respErr, respBody, respInfo) {
+        //     if (respErr) {
+        //         throw respErr;
+        //     }
+            
+        //     if (respInfo.statusCode == 200) {
+        //         console.log(respBody);
+        //     } else {
+        //         console.log(respInfo.statusCode);
+        //         console.log(respBody);
+        //     }
+        // });
+
+        // ctx.set("Content-Type", "application/json");
+
+        // console.log(ctx.request.files[Object.keys(ctx.request.files)[0]]);
+        // let file = ctx.request.files[Object.keys(ctx.request.files)[0]];
+        // let readStream = fs.createReadStream(file.path);
+        // let fileName = path.join(__dirname, '../public/upload/') + `/${file.name}`;
+        // // let path = fileName;
+        // let writeStream = fs.createWriteStream(fileName);
+        // readStream.pipe(writeStream);
+        // console.log({"error":0, "data": ['/upload/'+file.name]}.toString());
 
     }
+}
+
+async function upload(uploadToken, fileName, readableStream, putExtra){
+    var config = new qiniu.conf.Config();
+    var formUploader = new qiniu.form_up.FormUploader(config);
+    return new Promise(function(resolve, reject){
+
+        formUploader.putStream(uploadToken, fileName, readableStream, putExtra, function(respErr, respBody, respInfo) {
+            if (respErr) {
+                reject(respErr);
+                // throw respErr;
+            }
+            
+            if (respInfo.statusCode == 200) {
+                // console.log(respBody);
+                resolve({respInfo:respInfo, respBody: respBody});
+            } else {
+                // console.log(respInfo.statusCode);
+                // console.log(respBody);
+                resolve({respInfo:respInfo, respBody: respBody});
+            }
+            // ctx.body = JSON.stringify({"errno":0, "data": [respBody.key]});
+        });
+    });
 }
 
 async function find(myModel){
