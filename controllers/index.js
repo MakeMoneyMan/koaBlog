@@ -35,7 +35,7 @@ module.exports = {
         // console.log(result);
 
         //hot
-        let hot = await myModel.find({hot: {$gt: 0}});
+        let hot = await myModel.find({hot: {$gt: 0}, is_del: {$ne: 1}});
 
         await ctx.render('index', {
             title: "草果网", 
