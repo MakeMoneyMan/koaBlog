@@ -52,5 +52,8 @@ module.exports = router
     .post('/upload', async function(ctx, next){
         await index.upload(ctx, next);
     })
+    .get('/api/like/:id', async (ctx, next) => {
+        await article.like(ctx, next)
+    })
 
 

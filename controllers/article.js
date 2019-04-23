@@ -76,14 +76,14 @@ module.exports = {
     },
     detail: async function(ctx, next){
         const myModel = mongoose.model('BlogPostModel');
-        // console.log(typeof ctx.params.id);
-        var result = await find(myModel, {_id: ctx.params.id});
+        let result = await myModel.findById(ctx.params.id)
+        let view = result.view || 0
+        await myModel.update({_id: ctx.params.id}, {view: view + 1})
         var obj = {};
-        Object.assign(obj, result[0]);
+        Object.assign(obj, result);
 
         //hot
         let hot = await myModel.find({hot: {$gt: 0}});
-
         obj._doc.hot = hot;
 
         await ctx.render('detail', obj._doc);
@@ -97,21 +97,29 @@ module.exports = {
     },
     delete: async (ctx, next) => {
 
+        if(!ctx.session.username) ctx.redirect('/login');
         let myModel = mongoose.model('BlogPostModel');
         let result = await myModel.updateOne({_id: ctx.params.id}, {is_del: 1});
         ctx.body = '<script>alert("删除成功"); window.location.href="/login"</script>';
 
 
+    },
+    like: async (ctx, next)=>{
+        const myModel = mongoose.model('BlogPostModel');
+        let result = await myModel.findById(ctx.params.id)
+        let like = result.like || 0
+        let view = await myModel.update({_id: ctx.params.id}, {like: like + 1})
+        ctx.body = {code: 200, data: result.like + 1, msg: "点赞成功"}
     }
 }
 
-async function find(myModel, obj){
-    return new Promise((resolve, reject)=>{
-        myModel.find(obj, (err, result)=>{
-            // console.log('err')
-            // console.log(err)
-            if(err){ reject("添加失败") }
-            else {resolve(result);}
-        });
-    })
-}
+// async function find(myModel, obj){
+//     return new Promise((resolve, reject)=>{
+//         myModel.find(obj, (err, result)=>{
+//             // console.log('err')
+//             // console.log(err)
+//             if(err){ reject("添加失败") }
+//             else {resolve(result);}
+//         });
+//     })
+// }

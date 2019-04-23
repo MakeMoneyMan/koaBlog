@@ -6,9 +6,18 @@
 {% block left %}
 
 
-            
-    <h1>{{title}}</h1>
-    <div>{{content | safe}}</div>
+    <div class="main">
+        <h1>{{title}}</h1>
+        <div class="infomation">
+            <span>Time: {{date}}</span>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>Read: {{view}}</span>
+        </div>
+        <div>{{content | safe}}</div>
+        <div class="like">
+            <button type="button" class="btn btn-primary" id="like_btn">点赞文章 <span id="like">{{like}}</span></button>
+        </div>
+    </div>
 
     <style>
     pre {

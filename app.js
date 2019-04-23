@@ -34,7 +34,9 @@ mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then
         description: String,
         category: String,
         is_del: Number,
-        date: Date
+        date: Date,
+        like: Number,
+        view: Number
     });
     mongoose.model('BlogPostModel', BlogPost);
     // //查
