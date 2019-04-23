@@ -10,7 +10,7 @@ const body = require('koa-body');
 const session = require('koa-session');
 
 
-mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then(res=>{
+mongoose.connect('mongodb://localhost/admin', { useNewUrlParser: true }).then(res=>{
         
     // //    表的实例                collcetion名字(表名)
     // const myModel = mongoose.model('BlogPostModel', BlogPost);
