@@ -21,7 +21,14 @@
   <th scope="row">{{loop.index}}</th>
   <td>{{item.title}}</td>
   <td>{{item.is_del}}</td>
-  <td><a href="/article/{{item._id}}">编辑</a> | <a href="/delete/{{item._id}}">删除</a></td>
+  <td>
+    <a href="/article/{{item._id}}">编辑</a> | 
+    {% if item.is_del == 1%}
+    <a href="/delete/{{item._id}}">恢复</a>
+    {%else%}
+    <a href="/delete/{{item._id}}">删除</a>
+    {% endif %}
+  </td>
 </tr>
 {% endfor %}
 </tbody>

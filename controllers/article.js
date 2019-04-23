@@ -99,10 +99,15 @@ module.exports = {
 
         if(!ctx.session.username) ctx.redirect('/login');
         let myModel = mongoose.model('BlogPostModel');
-        let result = await myModel.updateOne({_id: ctx.params.id}, {is_del: 1});
-        ctx.body = '<script>alert("删除成功"); window.location.href="/login"</script>';
 
+        let result = await myModel.findById(ctx.params.id);
+        let temp = result.is_del == 1? 0: 1;
 
+        await myModel.updateOne({_id: ctx.params.id}, {is_del: temp});
+
+        if(temp == 0) ctx.body = '<script>alert("恢复成功"); window.location.href="/login"</script>';
+        if(temp == 1) ctx.body = '<script>alert("删除成功"); window.location.href="/login"</script>';
+        
     },
     like: async (ctx, next)=>{
         const myModel = mongoose.model('BlogPostModel');
