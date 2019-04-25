@@ -84,7 +84,8 @@ module.exports = {
         obj.view = view + 1;
 
         //hot
-        let hot = await myModel.find({hot: {$gt: 0}});
+        // let hot = await myModel.find({hot: {$gt: 0}});
+        let hot = await myModel.find({hot: {$gt: 0}, is_del: {$ne: 1}});
         obj._doc.hot = hot;
 
         await ctx.render('detail', obj._doc);
