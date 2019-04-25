@@ -81,6 +81,7 @@ module.exports = {
         await myModel.update({_id: ctx.params.id}, {view: view + 1})
         var obj = {};
         Object.assign(obj, result);
+        obj.view = view + 1;
 
         //hot
         let hot = await myModel.find({hot: {$gt: 0}});
@@ -114,7 +115,7 @@ module.exports = {
         let result = await myModel.findById(ctx.params.id)
         let like = result.like || 0
         let view = await myModel.update({_id: ctx.params.id}, {like: like + 1})
-        ctx.body = {code: 200, data: result.like + 1, msg: "点赞成功"}
+        ctx.body = {code: 200, data: like + 1, msg: "点赞成功"}
     }
 }
 

@@ -30,7 +30,7 @@ module.exports = {
         // console.log(ctx.session.username)
 
         let myModel = mongoose.model('BlogPostModel');
-        let total = await myModel.countDocuments(); //分页总条数
+        let total = await myModel.countDocuments(option); //分页总条数
         let result = await myModel.find(option).skip(number * page).limit(page).sort({'_id': -1}).exec();
         // console.log(result);
 
