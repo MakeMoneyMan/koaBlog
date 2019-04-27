@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>滑稽飞车js</title>
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+html,body,.main,.box{
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  overflow: hidden;
+} 
+
+.box {
+  -webkit-perspective: 100000;
+  -webkit-perspective-origin: 50% 50%;
+}
+
+
+.child {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  border-radius: 20%;
+  /* animation: ani 2s infinite linear; */
+}
+
+@keyframes ani {
+  0% {
+    transform: translateZ(-100000px);
+  }
+  100% {
+    transform: translateZ(0);
+  }
+}
+</style>
+</head>
+<body>
+<div id="styles"></div>
+<div class="main">
+<div class="box">
+</div>
+</div>
+
+
+<script>
+var d = document.getElementsByClassName("box")[0];
+var s = document.getElementById("styles");
+var stageW = document.body.offsetWidth
+var stageH = document.body.offsetHeight - 100
+
+var eles = [];
+for(var i = 0; i < 300; i++) {
+
+  var styleEle = document.createElement("style")
+  // styleEle.innerHTML = "@keyframes ani"+i+" { 0% { transform: translate3D(100px, 100px, -1000000px); } 100% { transform: translate3D(100px, 100px, 20000px); } }"
+  styleEle.innerHTML = "@keyframes ani"+i+" { 0% { transform: translate3D(" + (Math.random() * stageW) + "px, " + (Math.random() * stageH) + "px, -1000000px); } 100% { transform: translate3D(" + (Math.random() * stageW) + "px, " + (Math.random() * stageH) + "px, 100000px); } }"
+  s.appendChild(styleEle)
+
+  var ele = document.createElement("div");
+  ele.className = "child";
+  ele.style.animation = "ani"+i+" "+(Math.random()*5 + 5)+"s infinite linear";
+  
+  ele.style.backgroundImage = "url(./joke.png)"
+  ele.style.backgroundSize = "100%"
+  d.appendChild(ele)
+  
+}
+</script>
+</body>
+</html>
