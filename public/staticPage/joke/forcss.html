@@ -25,14 +25,11 @@ html,body,.main,.box{
   -webkit-perspective: 100000;
   -webkit-perspective-origin: 50% 50%;
 }
-
-
 .child {
   width: 100px;
   height: 100px;
   position: fixed;
   border-radius: 20%;
-  /* animation: ani 2s infinite linear; */
 }
 
 @keyframes ani {
@@ -51,8 +48,6 @@ html,body,.main,.box{
 <div class="box">
 </div>
 </div>
-
-
 <script>
 var d = document.getElementsByClassName("box")[0];
 var s = document.getElementById("styles");
@@ -63,7 +58,6 @@ var eles = [];
 for(var i = 0; i < 300; i++) {
 
   var styleEle = document.createElement("style")
-  // styleEle.innerHTML = "@keyframes ani"+i+" { 0% { transform: translate3D(100px, 100px, -1000000px); } 100% { transform: translate3D(100px, 100px, 20000px); } }"
   styleEle.innerHTML = "@keyframes ani"+i+" { 0% { transform: translate3D(" + (Math.random() * stageW) + "px, " + (Math.random() * stageH) + "px, -1000000px); } 100% { transform: translate3D(" + (Math.random() * stageW) + "px, " + (Math.random() * stageH) + "px, 100000px); } }"
   s.appendChild(styleEle)
 
