@@ -17,6 +17,10 @@
         <div class="like">
             <button type="button" class="btn btn-primary" id="like_btn">点赞文章 <span id="like">{{like}}</span></button>
         </div>
+        <div class="comment">
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <button id="commentBtn">提交评论</button>
+        </div>
     </div>
 
     <style>
@@ -45,4 +49,5 @@
         margin-bottom: 10px;
     }
     </style>
+
 {% endblock %}
