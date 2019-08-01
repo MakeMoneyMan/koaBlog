@@ -92,7 +92,7 @@ module.exports = {
         var readableStream = readStream; // 可读的流
         var result = await upload(uploadToken, fileName, readableStream, putExtra);
         console.log(result);
-        ctx.body = JSON.stringify({"errno":0, "data": ['http://bucket.icaoguo.com/' + result.respBody.key]});
+        ctx.body = JSON.stringify({"errno":0, "data": ['https://www.icaoguo.com/util/agent/http://bucket.icaoguo.com/' + result.respBody.key]});
         // await formUploader.putStream(uploadToken, fileName, readableStream, putExtra, function(respErr, respBody, respInfo) {
         //     if (respErr) {
         //         throw respErr;
