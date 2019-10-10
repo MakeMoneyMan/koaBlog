@@ -14,34 +14,34 @@ h5 {
 </style>
 <div class="list-group">
 
-        {% for item in list %}
+    {% for item in list %}
 
-        <a href="/detail/{{item._id}}" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{item.title}}</h5>
-            <!-- <small>3 days ago</small> -->
-            </div>
-            <p class="mb-1">{{item.description}}</p>
-            <!-- <small>Donec id elit non mi porta.</small> -->
-        </a>
-        {% endfor %}
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <!-- <li class="page-item"><a class="page-link text-secondary" href="/list/{{number - 1}}">Previous</a></li> -->
-                {% for item in total %}
-                    {% if loop.first %}
-                    {% endif %}
-                    {% if loop.index == number %}
-                    <li class="page-item active"><a class="page-link" href="/list/{{loop.index}}">{{loop.index}}</a></li>
-                    {% else %}
-                    <li class="page-item"><a class="page-link text-secondary" href="/list/{{loop.index}}">{{loop.index}}</a></li>
-                    {% endif %}
-                    {% if loop.last %}
-                    {% endif %}
-                {% endfor %}
-                <!-- <li class="page-item"><a class="page-link text-secondary" href="/list/{{total.length}}">Next</a></li> -->
-            </ul>
-        </nav>
-    </div>
+    <a href="/detail/{{item._id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{item.title}}</h5>
+        <!-- <small>3 days ago</small> -->
+        </div>
+        <p class="mb-1">{{item.description}}</p>
+        <!-- <small>Donec id elit non mi porta.</small> -->
+    </a>
+    {% endfor %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <!-- <li class="page-item"><a class="page-link text-secondary" href="/list/{{number - 1}}">Previous</a></li> -->
+            {% for item in total %}
+                {% if loop.first %}
+                {% endif %}
+                {% if loop.index == number %}
+                <li class="page-item active"><a class="page-link" href="/list/{{loop.index}}">{{loop.index}}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link text-secondary" href="/list/{{loop.index}}">{{loop.index}}</a></li>
+                {% endif %}
+                {% if loop.last %}
+                {% endif %}
+            {% endfor %}
+            <!-- <li class="page-item"><a class="page-link text-secondary" href="/list/{{total.length}}">Next</a></li> -->
+        </ul>
+    </nav>
+</div>
     
 {% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>滑稽飞车js</title>
+    <style>
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+html,body,.main,.box{
+  width: 100%;
+  height: 100%;
+  
+}
+ .main {
+  overflow: hidden;
+} 
+
+.box {
+  -webkit-perspective: 100000;
+  -webkit-perspective-origin: 50% 50%;
+}
+.child {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  border-radius: 20%;
+}
+</style>
+</head>
+<body>
+    
+<div class="main">
+<div class="box">
+</div>
+</div>
+
+
+<script>
+
+var d = document.getElementsByClassName("box")[0];
+
+var eles = [];
+for(var i = 0; i < 300; i++) {
+  
+  var ele = document.createElement("div");
+  ele.className = "child";
+  ele.style.transform = "translateZ("+(-i*10000)+"px)";
+  
+  ele.style.top = (Math.random() * 100) + "%";
+  ele.style.left = (Math.random() * 100) + "%";
+  
+  ele.style.animationDuration = Math.random() * 3 +"s";
+  
+  ele.style.backgroundImage = "url(./joke.png)"
+  ele.style.backgroundSize = "100%"
+  eles.push(ele);
+  d.appendChild(ele)
+  
+}
+
+setInterval(function(){
+
+  eles.forEach(function(item, index){
+    var sourceDistance = item.style.transform.split('(')[1].split("p")[0];
+    if(sourceDistance > 100000) sourceDistance = -1000000
+    item.style.transform = "translateZ("+ ((sourceDistance - 1 + 1) + (10000)) +"px)"
+  })
+  
+}, 16)
+</script>
+</body>
+</html>

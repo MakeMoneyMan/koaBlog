@@ -5,6 +5,7 @@ let router = new R();
 
 const index = require('./controllers/index')
 const article = require('./controllers/article')
+const util = require('./controllers/util')
 
 
 module.exports = router
@@ -51,6 +52,12 @@ module.exports = router
     })
     .post('/upload', async function(ctx, next){
         await index.upload(ctx, next);
+    })
+    .get('/api/like/:id', async (ctx, next) => {
+        await article.like(ctx, next)
+    })
+    .get('/util/agent', async (ctx, next) => {
+        await util.agent(ctx, next)
     })
 
 

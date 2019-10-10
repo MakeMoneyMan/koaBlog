@@ -35,7 +35,9 @@ mongoose.connect(config.dburl, { useNewUrlParser: true }).then(res=>{
         description: String,
         category: String,
         is_del: Number,
-        date: Date
+        date: Date,
+        like: Number,
+        view: Number
     });
     mongoose.model('BlogPostModel', BlogPost);
     // //查
@@ -77,6 +79,19 @@ app.use(session({}, app));
 app.use(view(__dirname + '/views', { map: {html: 'nunjucks' }}))
 app.use(bodyparser());
 app.use(myrouter.routes());
+app.use(function*(next) {  
+    try {
+        yield* next;
+    } catch (e) {
+       this.status = 500;
+    //    this.body = '500';
+       this.redirect('/');
+    }
+    if(parseInt(this.status) === 404){
+       this.redirect('/');
+    //    this.body = '404';
+    }
+});
 app.use(require('koa-static-server')({rootDir: 'public'}));
 app.use(router.allowedMethods());
 
