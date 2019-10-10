@@ -63,4 +63,4 @@ typings/
 
 public/upload/
 
-config
+config/*.js
