@@ -8,9 +8,10 @@ const view = require('koa-views');
 const body = require('koa-body');
 // const nunjucks = require('nunjucks');
 const session = require('koa-session');
+const config = require('./config')
 
 
-mongoose.connect('mongodb://119.29.92.54/admin', { useNewUrlParser: true }).then(res=>{
+mongoose.connect(config.dburl, { useNewUrlParser: true }).then(res=>{
         
     // //    表的实例                collcetion名字(表名)
     // const myModel = mongoose.model('BlogPostModel', BlogPost);
