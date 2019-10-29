@@ -19,7 +19,7 @@
     "koa-session": "^5.10.1",
     "koa-static-server": "^1.4.0",
     "koa-views": "^6.1.5",
-    "mongoose": "^5.4.20",
+    "mongoose": "^5.7.5",
     "qiniu": "^7.2.1",
     "request": "^2.88.0"
   },
